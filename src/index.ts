@@ -18,7 +18,7 @@ function hashcode() {
     console.log(maxDay);
     let increment = 1;
     if (projects.length > 15000) {
-        increment = 1000;
+        increment = 750;
     } else if (maxDay > 10000) {
         increment = 100;
     } else if (maxDay > 1000) {
