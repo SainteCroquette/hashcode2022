@@ -6,13 +6,21 @@ import DevArmy from "./model/DevArmy";
 
 // const file = "a_an_example";
 // const file = "b_better_start_small";
-const file = "c_collaboration";
+// const file = "c_collaboration";
 // const file = "d_dense_schedule";
-// const file = "e_exceptional_skills";
+const file = "e_exceptional_skills";
+// const file = "f_find_great_mentors";
 
 function hashcode() {
     console.log("== PARSING ==");
     const { devs, projects, maxDay } = readInput(`${file}.in.txt`);
+    console.log(maxDay);
+    let increment = 1;
+    if (maxDay > 10000) {
+        increment = 100;
+    } else if (maxDay > 1000) {
+        increment = 10;
+    }
 
     let devArmy: DevArmy = new DevArmy([...devs]);
     let date: number = 0;
@@ -46,7 +54,7 @@ function hashcode() {
             }
         });
 
-        date += 100;
+        date += increment;
     }
 
     writeOutput(output, `${file}.out`);
