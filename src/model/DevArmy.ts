@@ -2,23 +2,28 @@ import Dev from "./Dev";
 import Project from "./Project";
 
 export default class DevArmy {
-    constructor(
-        public devs: Dev[] = []
-    ) {}
+    constructor(public devs: Dev[]) {}
 
-    popFirstFound(skill: string, level: number): Dev|undefined {
+    popFirstFound(skill: string, level: number): Dev|null {
+        let devSelected: Dev|null = null;
+
         this.devs.forEach(dev => {
             const skillLevel = dev.getSkillLevel(skill);
-            if ( skillLevel && skillLevel >= level) {
-                this.devs = this.devs.filter(de => de != dev)
-                return dev;
+            if (skillLevel && skillLevel >= level) {
+                devSelected = dev;
             }
         })
-        return undefined
+
+        if (devSelected) {
+            // @ts-ignore
+            this.devs = this.devs.filter(dev => dev.name !== devSelected.name)
+        }
+
+        return devSelected;
     }
 
     getDevsBack(devs: Dev[]) {
-        this.devs.concat(devs);
+        this.devs = [...this.devs, ...devs];
     }
 
     tryToStartProject(project: Project, date: number): boolean {
@@ -30,10 +35,12 @@ export default class DevArmy {
                 task.dev = dev;
             }
         });
+
         if (team.length < project.tasks.length) {
             this.getDevsBack(team);
             return false;
         }
+
         project.started = true;
         project.started_at = date;
         return true;

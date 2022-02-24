@@ -9,6 +9,7 @@ import Output from './model/Output';
 export function readInput(file: string): Input {
     const devs: Dev[] = [];
     const projects: Project[] = [];
+    let maxDay = 0;
 
     const pathToFile = path.join(__dirname, '..', 'sample', 'input_data', file);
     const input = fs.readFileSync(pathToFile, 'utf8');
@@ -44,6 +45,10 @@ export function readInput(file: string): Input {
         projects.push(new Project(projectName, parseInt(numberDays, 10), parseInt(score, 10), parseInt(bestBeforeDay, 10)));
         currentLine++;
 
+        if (parseInt(bestBeforeDay, 10) > maxDay) {
+            maxDay = parseInt(bestBeforeDay, 10);
+        }
+
         for (let roleCount = 0; roleCount < parseInt(projRoleNumber, 10); roleCount++) {
             const [, roleName, roleLevel] = roleRegex.exec(inputLines[currentLine]);
             projects[projectCount].addTask(roleName, roleLevel);
@@ -51,12 +56,11 @@ export function readInput(file: string): Input {
         }
     }
 
-    return { devs, projects };
+    return { devs, projects, maxDay };
 }
 
 export function writeOutput(output: Output, file: string): void {
     const pathToFile = path.join(__dirname, '..', 'results', file);
-    const outputString = JSON.stringify(output);
 
-    fs.writeFileSync(pathToFile, outputString);
+    fs.writeFileSync(pathToFile, output.dump());
 }

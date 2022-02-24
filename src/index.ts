@@ -1,14 +1,20 @@
 import {readInput, writeOutput} from './file';
-import Dev from "./model/Dev";
-import Project from "./model/Project";
+
+import Output from "./model/Output";
+
 import DevArmy from "./model/DevArmy";
 
-const {devs, projects} = readInput("a_an_example.in.txt");
+// const file = "a_an_example";
+// const file = "b_better_start_small";
+const file = "c_collaboration";
+// const file = "d_dense_schedule";
+// const file = "e_exceptional_skills";
 
 function hashcode() {
-    let devs: Dev[]
-    let devArmy: DevArmy
-    let projects: Project[] = []
+    console.log("== PARSING ==");
+    const { devs, projects, maxDay } = readInput(`${file}.in.txt`);
+
+    let devArmy: DevArmy = new DevArmy([...devs]);
     let date: number = 0;
     let totalScore: number = 0
 
@@ -42,4 +48,8 @@ function hashcode() {
 
         date++;
     }
+
+    writeOutput(output, `${file}.out`);
 }
+
+hashcode();
