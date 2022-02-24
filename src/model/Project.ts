@@ -16,6 +16,10 @@ export default class Project {
         public started: Boolean = false,
     ) {}
 
+    addTask(skill: string, level: number) {
+        this.tasks.push({ skill, level, dev: null });
+    }
+
     startProjectIfDevsAvailable(devs: Dev[]) {
         this.tasks.forEach(task => {
         })
