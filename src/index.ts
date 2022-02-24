@@ -46,7 +46,7 @@ function hashcode() {
             }
         });
 
-        date++;
+        date += 100;
     }
 
     writeOutput(output, `${file}.out`);
