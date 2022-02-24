@@ -1,4 +1,5 @@
 import Dev from './Dev';
+import DevArmy from "./DevArmy";
 
 type Task = {
     skill: string;
@@ -14,6 +15,8 @@ export default class Project {
         public deadLine: number,
         public tasks: Task[],
         public started: Boolean = false,
+        public started_at: number = 0,
+        public done: boolean = false
     ) {}
 
     addTask(skill: string, level: number) {
@@ -25,10 +28,17 @@ export default class Project {
         })
     }
 
-    endProject(date: number): number {
-        /*this.workers.forEach(dev => {
-            dev.fire();
-        });*/
+    endProject(date: number, devArmy: DevArmy): number {
+        this.tasks.forEach(({ dev, skill, level }) => {
+            if (dev) {
+                // @ts-ignore
+                if (level >= dev.getSkillLevel(skill)) {
+                    dev.improveSkill(skill);
+                }
+                devArmy.devs.push(dev);
+            }
+        });
+        this.done = true;
         if (date >= this.deadLine + this.score)
             return 0;
         if (date >= this.deadLine)

@@ -21,7 +21,7 @@ export default class DevArmy {
         this.devs.concat(devs);
     }
 
-    tryToStartProject(project: Project): Boolean {
+    tryToStartProject(project: Project, date: number): boolean {
         let team: Dev[] = []
         project.tasks.forEach(task => {
             const dev = this.popFirstFound(task.skill, task.level);
@@ -35,6 +35,7 @@ export default class DevArmy {
             return false;
         }
         project.started = true;
+        project.started_at = date;
         return true;
     }
 }
