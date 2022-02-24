@@ -3,6 +3,7 @@ import {readInput, writeOutput} from './file';
 import Output from "./model/Output";
 
 import DevArmy from "./model/DevArmy";
+import Project from "./model/Project";
 
 //const file = "a_an_example";
 const file = "b_better_start_small";
@@ -34,7 +35,7 @@ function hashcode() {
     console.log("== COMPUTING ==");
     while (date <= maxDay) {
         console.log(`Day: ${date}`);
-        projects.forEach(project => {
+        projectsStartedAndOngoing.forEach(project => {
             if (project.started && !project.done) {
                 if (project.started_at + project.duration <= date) {
                     const score = project.endProject(date, devArmy);
@@ -44,11 +45,13 @@ function hashcode() {
                 }
             }
         });
+        projectsStartedAndOngoing = projectsStartedAndOngoing.filter(({ done }) => !done);
 
-        projects.forEach(project => {
+        projectsNotStarted.forEach(project => {
             if (!project.started) {
                 const hasStarted = devArmy.tryToStartProject(project, date);
                 if (hasStarted) {
+                    projectsStartedAndOngoing.push(project);
                     console.log(`Starting: ${project.name} with:`);
                     project.tasks.forEach(task => {
                         console.log(`${task.dev?.name}: ${task.skill}(${task.level})`)
@@ -56,6 +59,7 @@ function hashcode() {
                 }
             }
         });
+        projectsNotStarted = projectsNotStarted.filter(({ started }) => !started);
 
         date += increment;
     }
