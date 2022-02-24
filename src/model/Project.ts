@@ -12,8 +12,12 @@ export default class Project {
         public duration: number,
         public score: number,
         public deadLine: number,
-        public tasks: Task[]
+        public tasks: Task[] = []
     ) {}
+
+    addTask(skill: string, level: number) {
+        this.tasks.push({ skill, level, dev: null });
+    }
 
     startProjectIfDevsAvailable(devs: Dev[]) {
         this.tasks.forEach(task => {
