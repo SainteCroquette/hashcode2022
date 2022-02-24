@@ -1,0 +1,25 @@
+{
+  "name": "hashcode2022",
+  "version": "1.0.0",
+  "description": "HashCode 2022",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "start:dev": "nodemon --config nodemon.json src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SainteCroquette/hashcode2022.git"
+  },
+  "author": "Malo & Corentin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SainteCroquette/hashcode2022/issues"
+  },
+  "homepage": "https://github.com/SainteCroquette/hashcode2022#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  }
+}
