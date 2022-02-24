@@ -12,7 +12,8 @@ export default class Project {
         public duration: number,
         public score: number,
         public deadLine: number,
-        public tasks: Task[]
+        public tasks: Task[],
+        public started: Boolean = false,
     ) {}
 
     startProjectIfDevsAvailable(devs: Dev[]) {

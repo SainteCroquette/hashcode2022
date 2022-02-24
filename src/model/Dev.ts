@@ -14,6 +14,14 @@ export default class Dev {
         }
     }
 
+    hasSkill(skill: string) {
+        return this.skills.has(skill);
+    }
+
+    getSkillLevel(skill: string) {
+        return this.skills.get(skill);
+    }
+
     recruit() {
         this.isAvailable = false;
     }
