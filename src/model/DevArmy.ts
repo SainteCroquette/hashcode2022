@@ -6,11 +6,15 @@ export default class DevArmy {
 
     popFirstFound(skill: string, level: number): Dev|null {
         let devSelected: Dev|null = null;
+        let selectedSkillLevel = 0;
 
         this.devs.forEach(dev => {
             const skillLevel = dev.getSkillLevel(skill);
             if (skillLevel && skillLevel >= level) {
-                devSelected = dev;
+                if (!selectedSkillLevel || selectedSkillLevel > skillLevel) {
+                    devSelected = dev;
+                    selectedSkillLevel = skillLevel;
+                }
             }
         })
 

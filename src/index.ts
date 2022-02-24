@@ -4,11 +4,11 @@ import Output from "./model/Output";
 
 import DevArmy from "./model/DevArmy";
 
-// const file = "a_an_example";
-// const file = "b_better_start_small";
+//const file = "a_an_example";
+const file = "b_better_start_small";
 // const file = "c_collaboration";
 // const file = "d_dense_schedule";
-const file = "e_exceptional_skills";
+//const file = "e_exceptional_skills";
 // const file = "f_find_great_mentors";
 
 function hashcode() {
@@ -21,6 +21,9 @@ function hashcode() {
     } else if (maxDay > 1000) {
         increment = 10;
     }
+
+    let projectsNotStarted: Project[] = [...projects];
+    let projectsStartedAndOngoing: Project[] = [];
 
     let devArmy: DevArmy = new DevArmy([...devs]);
     let date: number = 0;
