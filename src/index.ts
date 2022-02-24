@@ -6,18 +6,20 @@ import DevArmy from "./model/DevArmy";
 import Project from "./model/Project";
 
 //const file = "a_an_example";
-const file = "b_better_start_small";
+// const file = "b_better_start_small";
 // const file = "c_collaboration";
 // const file = "d_dense_schedule";
 //const file = "e_exceptional_skills";
-// const file = "f_find_great_mentors";
+const file = "f_find_great_mentors";
 
 function hashcode() {
     console.log("== PARSING ==");
     const { devs, projects, maxDay } = readInput(`${file}.in.txt`);
     console.log(maxDay);
     let increment = 1;
-    if (maxDay > 10000) {
+    if (projects.length > 15000) {
+        increment = 1000;
+    } else if (maxDay > 10000) {
         increment = 100;
     } else if (maxDay > 1000) {
         increment = 10;
