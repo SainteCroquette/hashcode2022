@@ -25,7 +25,7 @@ function hashcode() {
         console.log(`Day: ${date}`);
         projects.forEach(project => {
             if (project.started && !project.done) {
-                if (project.started_at + project.duration === date) {
+                if (project.started_at + project.duration <= date) {
                     const score = project.endProject(date, devArmy);
                     totalScore += score;
                     output.addProject(project);
